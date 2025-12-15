@@ -358,7 +358,7 @@ export default function App({ modelScale = 3.5 }) {
             className="text-sm md:text-xl font-mono tracking-widest uppercase"
             style={{ color: '#c4a48c', textShadow: '0 0 2px rgba(224, 185, 148, 0.5)' }}
           >
-            OWNERS' CLUB
+            CREATORS' CLUB
           </p>
         </div>
         
@@ -394,7 +394,7 @@ export default function App({ modelScale = 3.5 }) {
           <div style={{ position: 'absolute', left: '-30%', top: '-40%', width: '160%', height: '120%', background: 'linear-gradient(90deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 20%, rgba(255,255,255,0) 30%)', transform: 'rotate(-22deg)', filter: 'blur(6px)', opacity: 0.55, pointerEvents: 'none' }} />
 
           <p className="text-[10px] md:text-[11px] font-light italic leading-tight" style={{ wordWrap: 'break-word', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '3', WebkitBoxOrient: 'vertical', maxHeight: 'calc(100% - 15px)' }}>
-            Introducing the Owners' Club , a realm for fashion-Art-tech creatives
+            Introducing the Creators' Club , a realm for fashion-Art-tech creatives
           </p>
           <p className="text-[9px] md:text-[10px] font-script tracking-wide opacity-95" style={{ marginTop: 'auto', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             powered by enthusiasts
