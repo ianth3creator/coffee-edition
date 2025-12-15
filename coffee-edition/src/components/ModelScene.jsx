@@ -3,6 +3,8 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, Environment, Html, Line } from "@react-three/drei";
 import { EffectComposer, DepthOfField, Bloom } from "@react-three/postprocessing";
 import { CircleDollarSign, Instagram, XIcon } from 'lucide-react'; // ✅ Added Instagram and Twitter
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
+import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module";
 import * as THREE from "three";
 
 const GlobalStyles = () => (
@@ -149,9 +151,26 @@ function SnapshotBox({ image, label, id, leftPx = 0, topPx = 0 }) {
 
 // ---------------- LoadedModel ----------------
 function LoadedModel({ url, scale = 3.5, modelRef }) {
-  const { scene } = useGLTF(url);
+  const gltf = useGLTF(url, (loader) => {
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("/draco/");
+    loader.setDRACOLoader(dracoLoader);
+    loader.setMeshoptDecoder(MeshoptDecoder);
+  });
+
+  const { scene } = gltf;
+
   useEffect(() => {
     if (!scene) return;
+
+    scene.traverse((obj) => {
+      if (obj.isMesh) {
+        obj.castShadow = false;
+        obj.receiveShadow = false;
+        obj.frustumCulled = true;
+      }
+    });
+
     const box = new THREE.Box3().setFromObject(scene);
     const center = box.getCenter(new THREE.Vector3());
     scene.position.sub(new THREE.Vector3(center.x, box.min.y, center.z));
@@ -513,3 +532,7 @@ export default function App({ modelScale = 3.5 }) {
     </div>
   );
 }
+
+useGLTF.preload("/models/ian_coffee.glb");
+useGLTF.preload("/models/ian_coffee_mobile.glb");
+useGLTF.preload("/models/fashion+model+3d+model.glb");
