@@ -255,7 +255,8 @@ export default function App({ modelScale = 3.5 }) {
       }
     };
     (async () => {
-      const primary = "/models/ian_coffee.glb";
+      const isMobile = window.innerWidth < 768;
+      const primary = isMobile ? "/models/ian_coffee_mobile.glb" : "/models/ian_coffee.glb";
       const fallback = "/models/fashion+model+3d+model.glb";
       if (await tryHead(primary)) setModelUrl(primary);
       else if (await tryHead(fallback)) setModelUrl(fallback);
