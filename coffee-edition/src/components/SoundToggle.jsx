@@ -72,6 +72,7 @@ const SoundToggle = () => {
 
     if (isPlaying) {
       ctx.resume();
+      audio.currentTime = 6; // Skip first 6 seconds to avoid intro tags
       audio.play().catch(err => {
         console.warn("Audio play blocked:", err);
         setIsPlaying(false);
